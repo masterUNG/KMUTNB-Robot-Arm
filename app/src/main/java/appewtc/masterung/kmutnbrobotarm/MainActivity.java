@@ -1,5 +1,6 @@
 package appewtc.masterung.kmutnbrobotarm;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     //Explicit
     private TextView textView;
     private SeekBar seekBar;
+    private int myAnInt;
 
 
     @Override
@@ -37,7 +39,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 textView.setText(Integer.toString(i * 10));
-                uploadValueToDweet(i*10);
+                myAnInt = i * 10;
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        uploadValueToDweet(myAnInt);
+                    }
+                }, 1000);
+
             }
 
             @Override

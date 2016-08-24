@@ -2,12 +2,19 @@ package appewtc.masterung.kmutnbrobotarm;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,6 +62,20 @@ public class MainActivity extends AppCompatActivity {
         RequestBody requestBody = new FormEncodingBuilder()
                 .add("Test", "test")
                 .build();
+        Request.Builder builder = new Request.Builder();
+        Request request = builder.url(urlDweet).post(requestBody).build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                Log.d("24AugV1", "Body ==> " + response.body().string());
+            }
+        });
 
 
     }   // upload

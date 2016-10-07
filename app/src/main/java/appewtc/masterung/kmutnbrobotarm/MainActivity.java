@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-
+                Log.d("24AugV1", "e ==> " + e.toString());
             }
 
             @Override
